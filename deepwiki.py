@@ -1,6 +1,8 @@
-import aiohttp
 import asyncio
-from typing import Dict, Any
+from typing import Any
+
+import aiohttp
+
 from astrbot import logger
 
 
@@ -28,7 +30,7 @@ class DeepWikiClient:
         repo_name: str,
         user_prompt: str,
         query_id: str,
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         payload = {
             "engine_id": "multihop",
             "user_query": f"<relevant_context>This query was sent from the wiki page: {repo_name.split('/')[1]} Overview.</relevant_context> {user_prompt}",
@@ -53,7 +55,7 @@ class DeepWikiClient:
 
     async def _get_markdown_data(
         self, session: aiohttp.ClientSession, query_id: str
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         try:
             async with session.get(
                 f"{self.base_url}/{query_id}", headers=self.headers
@@ -89,7 +91,7 @@ class DeepWikiClient:
 
     async def _polling_response(
         self, session: aiohttp.ClientSession, query_id: str
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         retry_count = 0
 
         while retry_count < self.max_retries:
@@ -110,7 +112,7 @@ class DeepWikiClient:
 
     async def query(
         self, repo_name: str, user_prompt: str, query_id: str
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         logger.debug(f"开始查询: repo={repo_name}, prompt={user_prompt}, id={query_id}")
         try:
             async with aiohttp.ClientSession() as session:

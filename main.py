@@ -1,20 +1,15 @@
 
 import uuid
+
+from astrbot.api import logger
 from astrbot.api.event import filter
-from astrbot.api.star import Context, Star, register
+from astrbot.api.star import Context, Star
 from astrbot.core.config.astrbot_config import AstrBotConfig
 from astrbot.core.platform.astr_message_event import AstrMessageEvent
-from astrbot.api import logger
+
 from .deepwiki import DeepWikiClient
 
 
-@register(
-    "astrbot_plugin_deepwiki",
-    "Zhalslar",
-    "使用deepwiki查询指定github仓库，可作为问答助手",
-    "1.0.1",
-    "https://github.com/Zhalslar/astrbot_plugin_deepwiki",
-)
 class DeepWikiPlugin(Star):
     def __init__(self, context: Context, config: AstrBotConfig):
         super().__init__(context)
