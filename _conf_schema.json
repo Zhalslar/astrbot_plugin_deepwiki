@@ -4,5 +4,33 @@
         "type": "string",
         "hint": "如果指令输入的参数未指定仓库，则使用此仓库",
         "default": "AstrBotDevs/AstrBot"
+    },
+    "default_prompt": {
+        "description": "默认提示词",
+        "type": "string",
+        "hint": "如果指令输入的参数未指定提示词，则使用此提示词",
+        "default": "介绍一下该项目"
+    },
+    "poll_interval":{
+        "description": "轮询间隔",
+        "hint":"定义每隔多少秒查一次deepwiki是否响应完成",
+        "type": "int",
+        "slider": {
+            "min": 3,
+            "max": 20,
+            "step": 1
+        },
+        "default": 8
+    },
+    "poll_max_times": {
+        "description": "最大轮询次数",
+        "hint":"定义最多可以查多少次deepwiki是否响应完成, 超过次数后deepwiki仍未响应视为查询失败",
+        "type": "int",
+        "slider": {
+            "min": 1,
+            "max": 20,
+            "step": 1
+        },
+        "default": 10
     }
 }
