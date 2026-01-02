@@ -2,6 +2,6 @@ name: astrbot_plugin_deepwiki
 display_name: DeepWiki查询
 desc: 使用deepwiki查询指定github仓库，可作为问答助手
 help: 略
-version: v1.0.2
+version: v1.0.3
 author: Zhalslar
 repo: https://github.com/Zhalslar/astrbot_plugin_deepwiki
