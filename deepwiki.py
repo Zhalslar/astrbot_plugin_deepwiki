@@ -25,7 +25,7 @@ class DeepWikiClient:
         if self.session:
             await self.session.close()
 
-    async def _send_message(
+    async def _repo_query(
         self, repo_name: str, user_prompt: str, query_id: str
     ) -> dict[str, Any]:
         payload = {
@@ -51,7 +51,7 @@ class DeepWikiClient:
             logger.error("请求异常:", str(e))
             return {}
 
-    async def _get_markdown_data(self, query_id: str) -> dict[str, Any]:
+    async def _get_poll_data(self, query_id: str) -> dict[str, Any]:
         try:
             async with self.session.get(
                 f"{self.QUERY_URL}/{query_id}", headers=self.HEADERS
@@ -91,7 +91,7 @@ class DeepWikiClient:
 
         while retry_count < max_retries:
             logger.debug(f"轮询中（第 {retry_count + 1}/{max_retries} 次）...")
-            result = await self._get_markdown_data(query_id)
+            result = await self._get_poll_data(query_id)
 
             if result["is_error"]:
                 raise Exception("deepwiki 响应错误")
@@ -105,12 +105,12 @@ class DeepWikiClient:
 
         return {"is_done": False, "content": "", "error": "响应超时"}
 
-    async def query(self, repo_name: str, user_prompt: str) -> str:
+    async def query(self, repo_name: str, prompt: str) -> str:
         """查询接口"""
         query_id = str(uuid.uuid4())
-        logger.debug(f"开始查询: repo={repo_name}, prompt={user_prompt}, id={query_id}")
-        send_result = await self._send_message(repo_name, user_prompt, query_id)
-        if not send_result or not send_result.get("status"):
+        logger.debug(f"开始查询: repo={repo_name}, prompt={prompt}, id={query_id}")
+        result = await self._repo_query(repo_name, prompt, query_id)
+        if not result or not result.get("status"):
             raise Exception("查询失败")
 
         logger.debug("查询请求已发送，开始轮询响应...")

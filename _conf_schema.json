@@ -5,6 +5,12 @@
         "hint": "如果指令输入的参数未指定仓库，则使用此仓库",
         "default": "AstrBotDevs/AstrBot"
     },
+    "default_repo_name": {
+        "description": "默认查询的仓库",
+        "type": "string",
+        "hint": "如果指令输入的参数未指定仓库，则使用此仓库",
+        "default": "AstrBotDevs/AstrBot"
+    },
     "poll_intelval":{
         "description": "轮询间隔",
         "hint":"定义每隔多少秒查一次deepwiki是否响应完成",

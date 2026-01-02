@@ -21,10 +21,10 @@ class DeepWikiPlugin(Star):
             if len(repo_name.split("/")) == 2
             else self.config["default_repo_name"]
         )
-        user_prompt = event.message_str.partition(" ")[2].removeprefix(repo_name)
+        prompt = event.message_str.partition(" ")[2].removeprefix(repo_name)
         yield event.plain_result(f"正在查询仓库：{repo_name}")
         try:
-            result = await self.client.query(repo_name, user_prompt)
+            result = await self.client.query(repo_name, prompt)
             yield event.plain_result(result)
         except Exception as e:
             yield event.plain_result(str(e))
