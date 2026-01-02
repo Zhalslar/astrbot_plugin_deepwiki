@@ -181,7 +181,7 @@ class DeepWikiClient:
                 logger.debug("响应完成")
                 return result
 
-            await asyncio.sleep(self.config["poll_intelval"])
+            await asyncio.sleep(self.config["poll_interval"])
 
         return {
             "is_done": False,
