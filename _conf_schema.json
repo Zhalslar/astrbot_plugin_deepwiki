@@ -11,7 +11,7 @@
         "hint": "如果指令输入的参数未指定提示词，则使用此提示词",
         "default": "介绍一下该项目"
     },
-    "poll_intelval":{
+    "poll_interval":{
         "description": "轮询间隔",
         "hint":"定义每隔多少秒查一次deepwiki是否响应完成",
         "type": "int",
