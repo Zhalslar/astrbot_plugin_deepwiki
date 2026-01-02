@@ -14,7 +14,7 @@ class DeepWikiPlugin(Star):
         self.client = DeepWikiClient(config)
 
     @filter.command("deepwiki", alias={"dw"})
-    async def deepwiki(self, event: AstrMessageEvent, repo_name: str):
+    async def deepwiki(self, event: AstrMessageEvent, repo_name: str  = ""):
         """dw <作者/仓库名> <提示词>"""
         repo_name = (
             repo_name
